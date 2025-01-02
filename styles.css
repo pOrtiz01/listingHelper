@@ -12,8 +12,8 @@
 }
 html{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 16pt;
     color: var(--text-color);
+    font-size: 16pt;
 }
 body{
     min-height: 100vh;
@@ -32,6 +32,27 @@ h1{
     text-align: center;
     color: var(--accent-color);
 }
+.normalLarge-text{
+    font-size: 20pt;
+}
+.normalMedium-text{
+    font-size: 16pt;
+}
+.normalSmall-text{
+    font-size: 12pt;
+}
+
+.boldLarge-text{
+    font-size: 20pt;
+}
+.boldMedium-text{
+    font-size: 16pt;
+}
+.boldSmall-text{
+    font-size: 12pt;
+    font-weight: 600;
+}
+
 .wrapper{
     width: 700px;
     max-width: 100%;
@@ -50,9 +71,36 @@ h1{
     color: var(--text-color);
     caret-color: var(--accent-color);
 }
+#todoDescription-input{
+    box-sizing: border-box;
+    padding: 12px 0px;
+    width: 100%;
+    max-width: 100%;
+    resize: none;
+    background: none;
+    border: none;
+    font:inherit;
+    color: var(--text-color);
+    caret-color: var(--accent-color);
+    font-size: 12pt;
+    margin-bottom: 10px;
+}
+#todoContact-input{
+    box-sizing: border-box;
+    padding: 2px 0px;
+    width: 100%;
+    background: none;
+    border: none;
+    font:inherit;
+    font-size: 12pt;
+    color: var(--text-color);
+    caret-color: var(--accent-color);  
+}
 #todoName-input:focus{
     outline:none;
 }
+
+
 form{
     position: relative;
 }
@@ -72,18 +120,41 @@ form{
     cursor: pointer;
 }
 .todo-listItem{
-    margin-bottom: 10px;
-    padding: 0 16px;
     background-color: var(--primary-color);
+    /* background-color: green; */
+    margin-bottom: 10px;
+    padding: 0px 16px;
     border-radius: 15px;
     display: flex;
+    flex-direction: column;
+}
+.todo-listItem.active .todoBody-listItem{
+    background-color: var(--primary-color);
+    /* background-color: green; */
+    margin-bottom: 10px;
+    padding: 0px 16px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.todoHeader-listItem{
+    display: flex;
     align-items: center;
+    /* background-color: red; */
+}
+.todoBody-listItem{
+    padding-left: 45px;
+    padding-bottom: 10px;
+    display: none;
+    flex-direction: column;
+    /* background-color: blue; */
 }
 .todo-listItem .todo-text{
     padding: 15px;
     padding-right: 0;
     flex-grow: 1;
     transition: 200ms ease;
+    font-weight: 600;
 }
 .deleteTodo-button{
     padding: 3px;
@@ -99,6 +170,7 @@ form{
 }
 .deleteTodo-button:hover svg{
     fill: var(--red-color);
+    transform: scale(1.05);
 }
 .custom-checkbox{
     border: 2px solid var(--accent-color);
@@ -111,6 +183,12 @@ form{
     flex-shrink: 0;
     transition: 200ms ease;
     cursor: pointer;
+}
+.container{
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
 }
 input[type="checkbox"]:checked ~ .custom-checkbox{
     background-color: var(--accent-color);
