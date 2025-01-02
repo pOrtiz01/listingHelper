@@ -18,7 +18,11 @@ function addTodo(){
   if(todoName.length > 0){
     const todoObject = {
       name : todoName,
-      completed : false
+      completed : false,
+      description : "",
+      contactName : "",
+      contactEmail : "",
+      contactPhone : "",
     }
     allTodos.push(todoObject);
     updateTodoList();
@@ -62,11 +66,47 @@ function createTodoItem(todo,todoIndex){
     <div class="todoBody-listItem">
         <textarea id="todoDescription-input" placeholder="Enter description of todo item:" autocomplete="off"></textarea>
         <h4 class="boldSmall-text">Contact Information</h4>
-        <input id="todoContact-input" type="text" placeholder="Enter Contact Name" autocomplete="off">
-        <input id="todoContact-input" type="text" placeholder="Enter Contact email" autocomplete="off">
-        <input id="todoContact-input" type="text" placeholder="Enter Contact phone" autocomplete="off">
+        <input id="todoContactName-input" class="todoContact-input" type="text" placeholder="Enter Contact Name" autocomplete="off">
+        <input id="todoContactEmail-input" class="todoContact-input" type="text" placeholder="Enter Contact email" autocomplete="off">
+        <input id="todoContactPhone-input" class="todoContact-input" type="text" placeholder="Enter Contact phone" autocomplete="off">
     </div>
   `
+  //Populate Item's fields
+  populateTodoFields(todo,todoLI);
+
+  //Add Event listeners for text inputs
+  const todoDescription = todoLI.querySelector(`textarea[id='todoDescription-input']`);
+  const todoContactName = todoLI.querySelector(`input[id='todoContactName-input']`);
+  const todoContactEmail = todoLI.querySelector(`input[id='todoContactEmail-input']`);
+  const todoContactPhone = todoLI.querySelector(`input[id='todoContactPhone-input']`);
+  
+  const handleDescriptionInput = () =>{
+    allTodos[todoIndex].description = todoDescription.value;
+    saveTodos();
+  }
+  todoDescription.addEventListener("input",handleDescriptionInput)
+  todoDescription.eventListener = handleDescriptionInput;
+
+  const handleContactNameInput = () =>{
+    allTodos[todoIndex].contactName = todoContactName.value;
+    saveTodos();
+  }
+  todoContactName.addEventListener("input",handleContactNameInput)
+  todoContactName.eventListener = handleContactNameInput;
+
+  const handleContactEmailInput = () =>{
+    allTodos[todoIndex].contactEmail = todoContactEmail.value;
+    saveTodos();
+  }
+  todoContactEmail.addEventListener("input",handleContactEmailInput)
+  todoContactEmail.eventListener = handleContactEmailInput;
+
+  const handleContactPhoneInput = () =>{
+    allTodos[todoIndex].contactPhone = todoContactPhone.value;
+    saveTodos();
+  }
+  todoContactPhone.addEventListener("input",handleContactPhoneInput)
+  todoContactPhone.eventListener = handleContactPhoneInput;
 
   //Add event listener to delete button
   const deleteTodoButton = todoLI.querySelector(".deleteTodo-button");
@@ -93,6 +133,27 @@ function createTodoItem(todo,todoIndex){
   checkbox.checked = todo.completed;
   return todoLI;
 }
+//Populate Todo item's fields 
+function populateTodoFields(todo,todoLI){
+  const todoDescription = todoLI.querySelector(`textarea[id='todoDescription-input']`);
+  const todoContactName = todoLI.querySelector(`input[id='todoContactName-input']`);
+  const todoContactEmail = todoLI.querySelector(`input[id='todoContactEmail-input']`);
+  const todoContactPhone = todoLI.querySelector(`input[id='todoContactPhone-input']`);
+  //if item exists and the object's field is not empty, populate the value
+  if(todoDescription && todo.description!==""){
+    todoDescription.value = todo.description;
+  }
+  if(todoContactName && todo.contactName!==""){
+    todoContactName.value = todo.contactName;
+  }
+  if(todoContactEmail && todo.contactEmail!==""){
+    todoContactEmail.value = todo.contactEmail;
+  }
+  if(todoContactPhone && todo.contactPhone!==""){
+    todoContactPhone.value = todo.contactPhone;
+  }
+}
+
 //filters out item at todoIndex from todo array, saves array and remakes list
 function deleteTodoItem(todoIndex){
   removeLabelTodoTextEventListener(todoIndex);
@@ -116,7 +177,6 @@ function getTodos(){
 function removeLabelTodoTextEventListener(todoIndex) {
   const label = document.querySelector(`label[id='todoText-${todoIndex}']`);
   if (label && label.eventListener) {
-      console.log("removing");
       label.removeEventListener('click', label.eventListener);
   }
 }

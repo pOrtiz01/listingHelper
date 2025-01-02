@@ -79,28 +79,18 @@ h1{
     resize: none;
     background: none;
     border: none;
-    font:inherit;
+    font:inherit;  
     color: var(--text-color);
     caret-color: var(--accent-color);
     font-size: 12pt;
     margin-bottom: 10px;
 }
-#todoContact-input{
-    box-sizing: border-box;
-    padding: 2px 0px;
-    width: 100%;
-    background: none;
-    border: none;
-    font:inherit;
-    font-size: 12pt;
-    color: var(--text-color);
-    caret-color: var(--accent-color);  
-}
 #todoName-input:focus{
     outline:none;
 }
-
-
+#todoDescription-input:focus{
+    outline:none;
+}
 form{
     position: relative;
 }
@@ -148,6 +138,20 @@ form{
     display: none;
     flex-direction: column;
     /* background-color: blue; */
+}
+.todoContact-input{
+    box-sizing: border-box;
+    padding: 2px 0px;
+    width: 100%;
+    background: none;
+    border: none;
+    font:inherit;
+    font-size: 12pt;
+    color: var(--text-color);
+    caret-color: var(--accent-color);  
+}
+.todoContact-input:focus{
+    outline:none;
 }
 .todo-listItem .todo-text{
     padding: 15px;
