@@ -73,56 +73,9 @@ function createTodoItem(todo,todoIndex){
   `
   //Populate Item's fields
   populateTodoFields(todo,todoLI);
-
-  //Add Event listeners for text inputs
-  const todoDescription = todoLI.querySelector(`textarea[id='todoDescription-input']`);
-  const todoContactName = todoLI.querySelector(`input[id='todoContactName-input']`);
-  const todoContactEmail = todoLI.querySelector(`input[id='todoContactEmail-input']`);
-  const todoContactPhone = todoLI.querySelector(`input[id='todoContactPhone-input']`);
   
-  const handleDescriptionInput = () =>{
-    allTodos[todoIndex].description = todoDescription.value;
-    saveTodos();
-  }
-  todoDescription.addEventListener("input",handleDescriptionInput)
-  todoDescription.eventListener = handleDescriptionInput;
-
-  const handleContactNameInput = () =>{
-    allTodos[todoIndex].contactName = todoContactName.value;
-    saveTodos();
-  }
-  todoContactName.addEventListener("input",handleContactNameInput)
-  todoContactName.eventListener = handleContactNameInput;
-
-  const handleContactEmailInput = () =>{
-    allTodos[todoIndex].contactEmail = todoContactEmail.value;
-    saveTodos();
-  }
-  todoContactEmail.addEventListener("input",handleContactEmailInput)
-  todoContactEmail.eventListener = handleContactEmailInput;
-
-  const handleContactPhoneInput = () =>{
-    allTodos[todoIndex].contactPhone = todoContactPhone.value;
-    saveTodos();
-  }
-  todoContactPhone.addEventListener("input",handleContactPhoneInput)
-  todoContactPhone.eventListener = handleContactPhoneInput;
-
-  //Add event listener to delete button
-  const deleteTodoButton = todoLI.querySelector(".deleteTodo-button");
-  const handleDeleteClick = () =>{
-    deleteTodoItem(todoIndex);
-  }
-  deleteTodoButton.addEventListener("click",handleDeleteClick);
-  deleteTodoButton.eventListener = handleDeleteClick;
-
-  //Add event listener to todo label text
-  const todoTextLabel = todoLI.querySelector("Label.todo-text");
-  const handleLabelClick = () => {
-    todoTextLabel.parentNode.parentNode.classList.toggle("active");
-  };
-  todoTextLabel.addEventListener("click", handleLabelClick);
-  todoTextLabel.eventListener = handleLabelClick;
+  //Add event listeners
+  addTodoBodyEventListeners(todoLI,todoIndex);
 
   //Update the completed field of todo item according to checkbox status
   const checkbox = todoLI.querySelector("input");
@@ -130,9 +83,12 @@ function createTodoItem(todo,todoIndex){
     allTodos[todoIndex].completed=checkbox.checked;
     saveTodos();
   })
+
   checkbox.checked = todo.completed;
+  
   return todoLI;
 }
+
 //Populate Todo item's fields 
 function populateTodoFields(todo,todoLI){
   const todoDescription = todoLI.querySelector(`textarea[id='todoDescription-input']`);
@@ -189,3 +145,56 @@ function removeDeleteButtonEventListener(todoIndex) {
   }
 }
 
+//Add Todo list item body input fields event listeners
+function addTodoBodyEventListeners(todoLI,todoIndex){
+  //Add Event listeners for text inputs
+  const todoDescription = todoLI.querySelector(`textarea[id='todoDescription-input']`);
+  const todoContactName = todoLI.querySelector(`input[id='todoContactName-input']`);
+  const todoContactEmail = todoLI.querySelector(`input[id='todoContactEmail-input']`);
+  const todoContactPhone = todoLI.querySelector(`input[id='todoContactPhone-input']`);
+
+  const handleDescriptionInput = () =>{
+    allTodos[todoIndex].description = todoDescription.value;
+    saveTodos();
+  }
+  todoDescription.addEventListener("input",handleDescriptionInput)
+  todoDescription.eventListener = handleDescriptionInput;
+
+  const handleContactNameInput = () =>{
+    allTodos[todoIndex].contactName = todoContactName.value;
+    saveTodos();
+  }
+  todoContactName.addEventListener("input",handleContactNameInput)
+  todoContactName.eventListener = handleContactNameInput;
+
+  const handleContactEmailInput = () =>{
+    allTodos[todoIndex].contactEmail = todoContactEmail.value;
+    saveTodos();
+  }
+  todoContactEmail.addEventListener("input",handleContactEmailInput)
+  todoContactEmail.eventListener = handleContactEmailInput;
+
+  const handleContactPhoneInput = () =>{
+    allTodos[todoIndex].contactPhone = todoContactPhone.value;
+    saveTodos();
+  }
+  todoContactPhone.addEventListener("input",handleContactPhoneInput)
+  todoContactPhone.eventListener = handleContactPhoneInput;
+
+    //Add event listener to delete button
+const deleteTodoButton = todoLI.querySelector(".deleteTodo-button");
+const handleDeleteClick = () =>{
+  deleteTodoItem(todoIndex);
+}
+deleteTodoButton.addEventListener("click",handleDeleteClick);
+deleteTodoButton.eventListener = handleDeleteClick;
+
+//Add event listener to todo label text
+const todoTextLabel = todoLI.querySelector("Label.todo-text");
+const handleLabelClick = () => {
+  todoTextLabel.parentNode.parentNode.classList.toggle("active");
+};
+todoTextLabel.addEventListener("click", handleLabelClick);
+todoTextLabel.eventListener = handleLabelClick;
+
+}
